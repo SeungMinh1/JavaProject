@@ -1,4 +1,4 @@
-package chap1;
+package com.yedam.java.ch01;
 
 import java.util.Scanner;
 

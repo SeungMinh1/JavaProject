@@ -24,9 +24,9 @@ public class ConditionalSubject {
 		   BMI = 체중 / ( 키 * 키 )
 		   저체중(18.5미만), 정상(18.5 이상 25미만), 과체중(25이상 30미만), 비만(30이상) */
 		
-		int weight, height, bmi;
-		weight = 90; height = 180;
-		bmi = weight/(height * height);
+		double weight = 80; 
+		double height = 1.8;
+		double bmi = weight/(height * height);
 		if(bmi<18.5) {
 			System.out.println("저체중");
 		}else if(18.5<=bmi && bmi<25) {
@@ -36,14 +36,15 @@ public class ConditionalSubject {
 		}else {
 			System.out.println("비만");
 		}
+		
 		/* 문제4) 선택한 단의 6번째 값을 출력하도록 하세요.
 		   예를 들어, 2단일 경우 2 X 6 = 12 
 		   단, 출력문에 변수를 사용하지 않는다.
 		 */
 		int num = 2;
 		switch(num) {
-		case 1: System.out.println("1 * 6 = 6"); break;
-		case 2: System.out.println("2 * 6 = 12"); break;
+		case 1: System.out.println("1 * 6 = 6 // 1 * 6 = " + (1*6)); break;
+		case 2: System.out.println("2 * 6 = 12 // 2 * 6 = " +(2*6)); break;
 		case 3: System.out.println("3 * 6 = 18"); break;
 		case 4: System.out.println("4 * 6 = 24"); break;
 		case 5: System.out.println("5 * 6 = 30"); break;
