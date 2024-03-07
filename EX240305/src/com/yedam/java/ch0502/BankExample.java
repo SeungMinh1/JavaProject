@@ -19,12 +19,12 @@ public class BankExample {
 				System.out.print("선택> ");
 				int menu = Integer.parseInt(sc.nextLine());  //sc.nextInt();
 				if(menu ==1) { //계좌개설
-					if(currentMax == accountList.length) {
+					if(currentMax == accountList.length) { //accountList.lengt의 최대값은 20
 						System.out.println("계좌를 생성할수 없습니다.");
 						System.out.println("은행이 보유할 수 있는 계좌는 20개입니다.");
 						continue;
 					}else {
-						currentMax++;
+						currentMax++; //현재보유중인 계좌개수 증가
 						int account = currentMax-1; //계좌번호 생성
 						System.out.println("계좌를 개설했습니다.");
 						System.out.println("계좌번호는 " +account +"입니다."); 
@@ -39,6 +39,8 @@ public class BankExample {
 						}
 						System.out.print("입금할 금액을 입력하시오 : ");
 						accountList[account] += Integer.parseInt(sc.nextLine());  //입금
+						System.out.println("계좌 잔액은 : "+accountList[account]);
+						
 					}else if(menu == 3){ //출금
 						System.out.print("계좌번호를 입력하시오 :");
 						int account = Integer.parseInt(sc.nextLine()); //계좌번호
@@ -53,6 +55,7 @@ public class BankExample {
 							System.out.println("잔액이 부족합니다. 메뉴로 돌아갑니다.");
 							continue;
 						}
+						System.out.println("계좌 잔액은 : "+accountList[account]);
 						
 					}else if(menu == 4){ //계좌이체
 						System.out.print("계좌번호를 입력하시오 :");
@@ -61,6 +64,7 @@ public class BankExample {
 							System.out.println("없는 계좌입니다. 메뉴로 돌아갑니다.");
 							continue;
 						}
+						System.out.println("계좌 잔액은 : "+accountList[account]);
 						System.out.print("이체할 계좌의 계좌번호를 입력하시오 :");
 						int move = Integer.parseInt(sc.nextLine()); // 계좌이체할 계좌번호
 						if(account>=currentMax) { //생성한 계좌인지 확인
