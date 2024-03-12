@@ -6,6 +6,7 @@ public class SmartPhone implements Phone{
 	SmartPhone(String owenr){
 		this.owner = owenr;
 	}
+	
 	public void exeutedApp(String appName) {
 		System.out.println(appName + "를 실행합니다.");
 	}
