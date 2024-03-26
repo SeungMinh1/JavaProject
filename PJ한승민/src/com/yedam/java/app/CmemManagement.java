@@ -21,7 +21,7 @@ public class CmemManagement {
 			int menuNo = menuSelect();
 			
 			if(menuNo == 1) {
-				insertEmp();
+				insertMember();
 			}if(menuNo == 2) {
 				 updateEmp();
 			}if(menuNo == 3) {
@@ -66,10 +66,11 @@ public class CmemManagement {
 			return menuNo;
 		}
 		
-		private void insertEmp() {
+		private void insertMember() {
 			CenterMember member = inputAll();
 			memberDAO.insertCenterMember(member);
 		}
+		
 		
 		private void updateEmp() {         /////////차후 수정예정
 			

@@ -1,19 +1,22 @@
 package com.yedam.java.app;
 
+import java.sql.Date;
 import java.util.Scanner;
 
+import com.yedam.java.center.CenterMember;
+import com.yedam.java.center.CmemberDAO;
+import com.yedam.java.center.LoginMemDAO;
 
-import com.yedam.loginMember.LoginMem;
-import com.yedam.loginMember.LoginMemDAO;
 
 public class LoginControl {
 	
 	Scanner sc = new Scanner(System.in);
+	private CmemberDAO memberDAO = CmemberDAO.getInstance();
 	
 	//싱글톤
-	private static LoginMem loginInfo = null;
-	public static LoginMem getLoginInfo() {
-		return loginInfo;
+	private static CenterMember loginCon = null;
+	public static CenterMember getLoginInfo() {
+		return loginCon;
 	}
 		
 	public void run() {
@@ -25,7 +28,7 @@ public class LoginControl {
 				//로그인
 				login();
 			}else if(menuNo == 2) {
-				
+				insertMember();
 			}else if(menuNo == 3) {
 				//종료
 				end();
@@ -45,18 +48,18 @@ public class LoginControl {
 	
 	private void login() {
 		//아이디와 비밀번호 입력
-		LoginMem inputInfo = inputMember();
+		CenterMember inputInfo = inputMember();
 		//로그인 시도
-		loginInfo = LoginMemDAO.getInstance().selectOne(inputInfo);
+		loginCon = LoginMemDAO.getInstance().selectOne(inputInfo);
 		
 		//실패할 경우 그대로 메소드 종료
-		if(loginInfo == null) return;
+		if(loginCon == null) return;
 		
 		//성공할 경우 프로그램을 실행
 		new HumanResourceMMng().run();
 	}
-	private LoginMem inputMember() {
-		LoginMem info = new LoginMem();
+	private CenterMember inputMember() {
+		CenterMember info = new CenterMember();
 		System.out.print("아이디 > ");
 		info.setId(sc.nextLine());
 		System.out.print("비밀번호 > ");
@@ -68,6 +71,7 @@ public class LoginControl {
 	private int menuSelect() {
 		int menuNo = 0;
 		try {
+			System.out.print("선택하세요 : ");
 			menuNo = Integer.parseInt(sc.nextLine());
 		}catch(NumberFormatException e) {
 			System.out.println("숫자를 입력하세요.");
@@ -86,14 +90,38 @@ public class LoginControl {
 	}
 	
 	//권한체크
-	public static boolean selectLoginRole() {
-		int memberRole = loginInfo.getMemberRole();
-		if(memberRole == 0) {
+	public static boolean loginManger() {
+		String manager = "oracle";
+		if(manager.equals(loginCon.getId()) == true) {
 			return true;
 		}else {
 			return false;
 		}
 	}
+	
+	private void insertMember() {
+		CenterMember member = inputAll();
+		memberDAO.insertCenterMember(member);
+	}
+	
+	private CenterMember inputAll() {
+		CenterMember member = new CenterMember();
+		System.out.print("회원ID>>");
+		member.setId(sc.next());
+		System.out.print("비밀번호>>");
+		member.setPwd(sc.next());
+		System.out.print("이름>>");
+		member.setName(sc.next());
+		System.out.print("성별>>");
+		member.setGender(sc.next());
+		System.out.print("생년월일>>");
+		member.setBirthdate(Date.valueOf(sc.next()));
+		System.out.print("주소>>");
+		member.setAddress(sc.next());
+		
+		return member;
+	}
+	
 	
 	
 

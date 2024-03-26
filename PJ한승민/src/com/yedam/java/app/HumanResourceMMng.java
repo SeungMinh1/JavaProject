@@ -12,8 +12,7 @@ Scanner sc = null; //new Scanner(System.in);
 		}
 	
 	public void run() {
-		boolean role = LoginControl.selectLoginRole();
-		
+		boolean role = LoginControl.loginManger();
 		while(true) {
 			
 			menuPrint(role);

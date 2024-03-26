@@ -20,20 +20,14 @@ public class EnrolmentMng {
 			
 			if(menuNo == 1) {
 				System.out.println("수강 가능한 강좌");
-				List<EduClass> list = educlassDAO.selectClassALL();
-				for(EduClass data : list) {
-					System.out.println(data);
-				}
+				selectClassALL();
 				
 			}else if(menuNo == 2) {
 				System.out.println("신청할 강의번호를 입력하세요");
-				System.out.println("==========================================================================");
-				List<EduClass> list = educlassDAO.selectClassALL();
-				for(EduClass data : list) {
-					System.out.println(data);
-				}
-				
-				EduClass eclass = selectEClassNum();
+				System.out.println("------------------------------------------------------------");
+				selectClassALL();
+				System.out.println(selectEClassNum());
+				//EduClass eclass = selectEClassNum();
 				
 			}else if(menuNo == 3) {
 				System.out.println("강의 취소?");
@@ -46,12 +40,20 @@ public class EnrolmentMng {
 		end();
 			
 	}
+	
+	
+	private void selectClassALL(){
+		List<EduClass> list = educlassDAO.selectClassALL();
+		for(EduClass data : list) {
+			System.out.println(data);
+		}
+	}
 
 	private EduClass selectEClassNum() {
-		
+
 		int num = menuSelect();
 		EduClass eclass = educlassDAO.selectClassNum(num);
-		System.out.println(eclass);
+		//System.out.println(eclass);
 		return eclass;
 		
 	}

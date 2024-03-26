@@ -282,7 +282,7 @@ public class EduClassDAO extends DAO {
 			rs = pstmt.executeQuery(select);
 			
 			// 5. 결과값 처리하기
-			while(rs.next()) {
+			if(rs.next()) {
 				eclass = new EduClass();
 				eclass.setClassnum(rs.getInt("classNum"));
 				eclass.setTitle(rs.getString("title"));

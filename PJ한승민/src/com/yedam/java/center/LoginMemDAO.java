@@ -1,9 +1,9 @@
-package com.yedam.loginMember;
+package com.yedam.java.center;
 
 import java.sql.SQLException;
 
-
 import com.yedam.java.common.DAO;
+
 
 public class LoginMemDAO extends DAO {
 	
@@ -18,15 +18,15 @@ public class LoginMemDAO extends DAO {
 	}
 	
 	//CRUD
-	public LoginMem selectOne(LoginMem members) {
-		LoginMem loginInfo = null;
+	public CenterMember selectOne(CenterMember members) {
+		CenterMember loginInfo = null;
 		
 		try {
 			//DB연결
 			connect();
 			//SQL문
 			String sql = "SELECT * "
-					   + "FROM member "
+					   + "FROM CENTER_MEMBER "
 					   + "WHERE id = '" + members.getId() +"'"; 
 			
 			stmt = conn.createStatement();
@@ -36,10 +36,10 @@ public class LoginMemDAO extends DAO {
 				//아이디 존재
 				if(rs.getString("pwd").equals(members.getPwd())){
 					//비밀번호 일치 -> 로그인 성공
-					loginInfo = new LoginMem();
+					loginInfo = new CenterMember();
 					loginInfo.setId(rs.getString("id"));
 					loginInfo.setPwd(rs.getString("pwd"));
-					loginInfo.setMemberRole(rs.getInt("member_role"));
+					
 				}else {
 					System.out.println("비밀번호가 일치하지 않습니다.");
 				}
@@ -55,8 +55,9 @@ public class LoginMemDAO extends DAO {
 		return loginInfo;
 	}
 	
-	// 등록
-	public void insertLoginMember(LoginMem members) {
+	
+	// 1) 등록
+	public void insertCenterMember(CenterMember member) {
 		try {
 			// 1. DB와 연결
 			connect();
@@ -64,15 +65,17 @@ public class LoginMemDAO extends DAO {
 			// 2. 객체 생성
 			// 3. SQL 실행
 			// 4. 결과처리
-			String insert = "INSERT into center_member (id, pwd, member_role)  "
-					+ "VALUES(?,?,?)";
+			String insert = "INSERT into center_member (id, pwd, name, gender, birthdate, address)  "
+					+ "VALUES(?,?,?,?,?,?)";
 	
 			pstmt = conn.prepareStatement(insert);
 			
-			pstmt.setString(1, members.getId());
-			pstmt.setString(2, members.getPwd());
-			pstmt.setInt(3, members.getMemberRole());
-
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getPwd());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getGender());
+			pstmt.setDate(5, member.getBirthdate());
+			pstmt.setString(6, member.getAddress());
 			
 			//  => 실제 쿼리문이 완성됨
 			
@@ -90,6 +93,11 @@ public class LoginMemDAO extends DAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	
+	
 	
 	
 
