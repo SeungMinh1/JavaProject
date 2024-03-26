@@ -20,7 +20,6 @@ public class CmemManagement {
 			
 			int menuNo = menuSelect();
 			
-			
 			if(menuNo == 1) {
 				insertEmp();
 			}if(menuNo == 2) {
@@ -139,7 +138,12 @@ public class CmemManagement {
 			
 			String Id = inputId();
 			CenterMember member = memberDAO.slectMember(Id);
-			System.out.println(member);
+			if(member == null) {
+				System.out.println("없는 정보입니다.");
+			}else {
+				System.out.println(member);
+			}
+			
 		}
 		
 		private int selectUpdate() {
@@ -207,7 +211,9 @@ public class CmemManagement {
 	
 	
 	
-	
+		public void Enrolment() {
+			
+		}
 	
 	
 	
