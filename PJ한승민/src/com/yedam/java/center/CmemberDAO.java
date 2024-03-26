@@ -7,7 +7,6 @@ import java.util.List;
 import com.yedam.java.common.DAO;
 
 
-
 public class CmemberDAO extends DAO {
 	
 	//싱글톤

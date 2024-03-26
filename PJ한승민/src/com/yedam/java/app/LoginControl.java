@@ -2,7 +2,7 @@ package com.yedam.java.app;
 
 import java.util.Scanner;
 
-import com.yedam.education.EduClass;
+
 import com.yedam.loginMember.LoginMem;
 import com.yedam.loginMember.LoginMemDAO;
 

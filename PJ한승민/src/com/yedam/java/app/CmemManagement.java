@@ -210,11 +210,7 @@ public class CmemManagement {
 		
 	
 	
-	
-		public void Enrolment() {
-			
-		}
-	
+
 	
 	
 	
