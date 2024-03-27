@@ -76,15 +76,14 @@ public class CmemManagement {
 			
 			int menu =selectUpdate();
 			if(menu == 1) {
-				updatePrint1();
-			}else if(menu == 2) {
 				updatePrint2();
-			}else if(menu == 3) {
+			}else if(menu == 2) {
 				updatePrint3();
 			}else {
 				System.out.println("잘못된 메뉴선택입니다.");
 			}
 		}
+		/*
 		private void updatePrint1() { ////////////////////////////////////////////아이디는 변경못하는가..?
 			String Id = inputId();
 			CenterMember member = memberDAO.slectMember(Id);    
@@ -100,6 +99,7 @@ public class CmemManagement {
 			}
 			
 		}
+		*/
 		private void updatePrint2() {
 			String Id = inputId();
 			CenterMember member = memberDAO.slectMember(Id);    
@@ -150,7 +150,7 @@ public class CmemManagement {
 		private int selectUpdate() {
 			int menu = 0;
 			System.out.println("=====================================");
-			System.out.println("1.아이디 변경 | 2.비밀번호 변경 | 3.주소변경");
+			System.out.println("| 1.비밀번호 변경 | 2.주소변경");
 			System.out.println("=====================================");
 			System.out.print("메뉴를 선택하시오 : ");
 			menu = sc.nextInt();

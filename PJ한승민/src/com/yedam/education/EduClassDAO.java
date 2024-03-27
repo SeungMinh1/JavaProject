@@ -157,6 +157,39 @@ public class EduClassDAO extends DAO {
 		}
 	}
 	
+	///////////////// 
+	public void updateMemberProfessor(EduClass eclass) {  
+		try {
+			// 1. DB와 연결
+			connect();
+			
+			// 2. 객체 생성
+			// 3. SQL 실행
+			// 4. 결과처리
+			String update = "UPDATE education_class "
+					+ "SET professor = ? "
+					+ "WHERE classNum = ? ";
+	
+			pstmt = conn.prepareStatement(update);
+			pstmt.setString(1, eclass.getProfessor());
+			pstmt.setInt(2, eclass.getClassnum());
+			
+			// 4. SQL 실행하기 - SELECT문
+			
+			int result = pstmt.executeUpdate();
+			
+			// 5. 결과값 처리하기
+			
+			System.out.println("UPDATE결과 : " + result);
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			//5.자원해제
+			disconnect();
+		}
+	}
 	
 	// 3) 삭제
 	public void deleteEclass(int classNum) {
@@ -264,7 +297,7 @@ public class EduClassDAO extends DAO {
 	
 	// 4) 강좌 번호 검색
 	public EduClass selectClassNum(int num) {
-		EduClass eclass = new EduClass();
+		EduClass eclass = null;
 		try {
 			// 1. DB와 연결
 			connect();
@@ -279,7 +312,7 @@ public class EduClassDAO extends DAO {
 			
 			// 4. SQL 실행하기 - SELECT문
 			
-			rs = pstmt.executeQuery(select);
+			rs = pstmt.executeQuery();
 			
 			// 5. 결과값 처리하기
 			if(rs.next()) {

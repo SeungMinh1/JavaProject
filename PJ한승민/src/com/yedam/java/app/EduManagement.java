@@ -27,13 +27,12 @@ public class EduManagement {
 				}if(menuNo == 3) {
 					deleteEClass();
 				}if(menuNo == 4) {
-					selectEClassTitle();
+					selectEClassNum();
 				}if(menuNo == 5) {
 					selectEClassAll();
 				}
 				
-
-				
+		
 				if(menuNo == 9) {
 					break;
 				}
@@ -81,22 +80,26 @@ public class EduManagement {
 		if(menu == 1) {
 			updatePrint1();
 		}
-		/*
 		else if(menu == 2) {
 			updatePrint2();
-		}else if(menu == 3) {
+		}
+		/*
+		else if(menu == 3) {
 			updatePrint3();
 			*/
 		else {
 			System.out.println("잘못된 메뉴선택입니다.");
 		}
 	}
-	private void updatePrint1() { ////////////////////////////////////////////아이디는 변경못하는가..?
+	private void updatePrint1() { 
+		selectEClassAll();
+		
 		int num = inputNum();
-		EduClass elcass = educlassDAO.selectClassNum(num);    
+		EduClass elcass = null;
+		elcass = educlassDAO.selectClassNum(num);    
 		
 		if(elcass == null) {
-			System.out.println("없는 정보입니다.");
+			System.out.println("없는 강의입니다.");
 		}else {
 			System.out.println(elcass);  
 			
@@ -107,12 +110,31 @@ public class EduManagement {
 		}
 		
 	}
+	private void updatePrint2() {
+		selectEClassAll();
+		
+		int num = inputNum();
+		EduClass elcass = null;
+		elcass = educlassDAO.selectClassNum(num);    
+		
+		if(elcass == null) {
+			System.out.println("없는 강의입니다.");
+		}else {
+			System.out.println(elcass);  
+			
+			String changepro = inputprofesser();
+			elcass.setProfessor(changepro);
+			educlassDAO.updateMemberProfessor(elcass);
+			System.out.println("수정되었습니다.");
+		}
+		
+	}
 	
 	private int selectUpdate() {
 		int menu = 0;
-		System.out.println("===========================================");
-		System.out.println("1.강의제목 변경 | 2.담당 교수 변경 | 3.최대인원수 변경");
-		System.out.println("===========================================");
+		System.out.println("===================================");
+		System.out.println("1.강의제목 변경 | 2.담당 교수 변경 |");
+		System.out.println("===================================");
 		System.out.print("메뉴를 선택하시오 : ");
 		menu = sc.nextInt();
 		return menu;
@@ -146,11 +168,12 @@ public class EduManagement {
 		String changeTitle = sc.next();
 		return changeTitle;
 	}
-	private String inputTitle2() {
-		System.out.print("강의제목 입력 : ");
+	private String inputprofesser() {
+		System.out.print("변경할 교수이름을 입력 : ");
 		String changeTitle = sc.next();
 		return changeTitle;
 	}
+	
 	
 	private void deleteEClass() {
 		int num = inputNum();
@@ -158,18 +181,39 @@ public class EduManagement {
 	}
 	
 	
-
+	/*
 	private void selectEClassTitle() {
 		
-		String title = inputTitle2();	
+		String title = inputTitle2();
 		List<EduClass> list = educlassDAO.selectClassTitle(title);
-		for(EduClass data : list) {
-			System.out.println(data);
+		if(list == null) {
+			System.out.println("없는 강의 입니다.");
+		}else {
+			for(EduClass data : list) {
+				System.out.println(data);
+			}
 		}
 	}
 	
+	private String inputTitle2() {
+		System.out.print("강의제목 입력 : ");
+		String changeTitle = sc.next();
+		return changeTitle;
+	}
+	*/
 	
-	
+	private void selectEClassNum() {
+		
+		int num = inputNum();
+		EduClass eclass = educlassDAO.selectClassNum(num);
+		if(eclass == null) {
+			System.out.println("없는 강의번호 입니다.");
+		}else {
+			System.out.println(eclass);
+		}
+		
+	}
+
 	private void selectEClassAll() {
 		List<EduClass> list = educlassDAO.selectClassALL();
 		for(EduClass data : list) {
