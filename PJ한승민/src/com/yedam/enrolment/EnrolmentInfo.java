@@ -7,7 +7,9 @@ public class EnrolmentInfo {
 	private String classTitle ;
 	
 	
+
 	//메소드
+	
 	public String getMemberId() {
 		return memberId;
 	}
@@ -20,13 +22,12 @@ public class EnrolmentInfo {
 	public void setClassTitle(String classTitle) {
 		this.classTitle = classTitle;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "EnrolmentInfo [memberId=" + memberId + ", classTitle=" + classTitle + "]";
 	}
 	
-	
+	//
 	
 }

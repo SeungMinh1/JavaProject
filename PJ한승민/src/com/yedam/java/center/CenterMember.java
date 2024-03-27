@@ -11,7 +11,6 @@ public class CenterMember {
 	private String gender;
 	private Date birthdate;
 	private String address;
-	private String countClass;
 	
 	//생성자
 	
@@ -54,17 +53,12 @@ public class CenterMember {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getTitle() {
-		return countClass;
-	}
-	public void setTitle(String countClass) {
-		this.countClass = countClass;
-	}
+	
 	
 	@Override
 	public String toString() {
 		return "CenterMember [id=" + id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", birthdate="
-				+ birthdate + ", address=" + address + ", countClass=" + countClass + "]";
+				+ birthdate + ", address=" + address +"]";
 	}
 	
 

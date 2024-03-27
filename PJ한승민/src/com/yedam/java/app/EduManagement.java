@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import com.yedam.education.EduClass;
 import com.yedam.education.EduClassDAO;
+import com.yedam.enrolment.EnrolmentDAO;
+import com.yedam.enrolment.EnrolmentInfo;
 
 public class EduManagement {
 	
@@ -12,6 +14,7 @@ public class EduManagement {
 	
 	private Scanner sc = new Scanner(System.in);
 	private EduClassDAO educlassDAO= EduClassDAO.getInstance();
+	private EnrolmentDAO enrolmentDAO = EnrolmentDAO.getInstance();
 	
 	public void run() {
 			
@@ -30,8 +33,11 @@ public class EduManagement {
 					selectEClassNum();
 				}if(menuNo == 5) {
 					selectEClassAll();
+				}if(menuNo == 6) {
+					selectEnrolALL();
+				}if(menuNo == 7) {
+					deleteEnrolment();
 				}
-				
 		
 				if(menuNo == 9) {
 					break;
@@ -39,6 +45,7 @@ public class EduManagement {
 			}
 			end();
 		}
+	
 	// 메소드
 	private void end() {
 		System.out.println("프로그램을 종료합니다.");
@@ -51,10 +58,12 @@ public class EduManagement {
 		menu += "3.강의삭제 ";
 		menu += "4.강의조회 ";
 		menu += "5.강의전체조회 ";
+		menu += "6.수강신청전체조회 ";
+		menu += "7. 수강신청 삭제 ";
 		menu += "9.종료 ";
-		System.out.println("===========================================================");
+		System.out.println("====================================================================");
 		System.out.println(menu);
-		System.out.println("===========================================================");
+		System.out.println("====================================================================");
 	}
 	
 	private int menuSelect() {
@@ -74,24 +83,21 @@ public class EduManagement {
 		educlassDAO.insertClass(eclass);
 	}
 	
-	private void updateEClass() {         /////////차후 수정예정
+	private void updateEClass() {       
 		
 		int menu =selectUpdate();
 		if(menu == 1) {
-			updatePrint1();
+			updatePrint1();//강의 title 변경
 		}
 		else if(menu == 2) {
-			updatePrint2();
+			updatePrint2();//강의교수 변경
 		}
-		/*
-		else if(menu == 3) {
-			updatePrint3();
-			*/
+
 		else {
 			System.out.println("잘못된 메뉴선택입니다.");
 		}
 	}
-	private void updatePrint1() { 
+	private void updatePrint1() {  //강의 title 변경
 		selectEClassAll();
 		
 		int num = inputNum();
@@ -110,7 +116,7 @@ public class EduManagement {
 		}
 		
 	}
-	private void updatePrint2() {
+	private void updatePrint2() {  //강의교수 변경
 		selectEClassAll();
 		
 		int num = inputNum();
@@ -143,7 +149,7 @@ public class EduManagement {
 	
 	
 	
-	private EduClass inputAll() {
+	private EduClass inputAll() { // 강의등록에 사용
 		EduClass eclass = new EduClass();
 		System.out.print("강의번호>> ");
 		eclass.setClassnum(sc.nextInt());
@@ -180,6 +186,47 @@ public class EduManagement {
 		educlassDAO.deleteEclass(num);
 	}
 	
+	private void selectEClassNum() { // 강의조회
+		
+		int num = inputNum();
+		EduClass eclass = educlassDAO.selectClassNum(num);
+		if(eclass == null) {
+			System.out.println("없는 강의번호 입니다.");
+		}else {
+			System.out.println(eclass);
+		}
+		
+	}
+
+	private void selectEClassAll() { //전체조회
+		List<EduClass> list = educlassDAO.selectClassALL();
+		for(EduClass data : list) {
+			System.out.println(data);
+		}
+	}
+	private void selectEnrolALL() {
+		List<EnrolmentInfo> list = enrolmentDAO.EnrolmentALL();
+		for(EnrolmentInfo data : list) {
+			System.out.println(data);
+		}
+
+	}
+	private void deleteEnrolment() {
+		String title = inputTitle2();
+		String id = inputId();
+		enrolmentDAO.deleteEnrolment(id,title);
+	}
+	
+	private String inputTitle2() {
+		System.out.print("강의제목 입력 : ");
+		String changeTitle = sc.next();
+		return changeTitle;
+	}
+	private String inputId() {
+		System.out.print("ID 입력 : ");
+		String ID = sc.next();
+		return ID;
+	}
 	
 	/*
 	private void selectEClassTitle() {
@@ -201,25 +248,6 @@ public class EduManagement {
 		return changeTitle;
 	}
 	*/
-	
-	private void selectEClassNum() {
-		
-		int num = inputNum();
-		EduClass eclass = educlassDAO.selectClassNum(num);
-		if(eclass == null) {
-			System.out.println("없는 강의번호 입니다.");
-		}else {
-			System.out.println(eclass);
-		}
-		
-	}
-
-	private void selectEClassAll() {
-		List<EduClass> list = educlassDAO.selectClassALL();
-		for(EduClass data : list) {
-			System.out.println(data);
-		}
-	}
 	
 	
 	

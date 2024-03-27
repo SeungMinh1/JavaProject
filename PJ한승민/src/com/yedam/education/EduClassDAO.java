@@ -21,6 +21,7 @@ public class EduClassDAO extends DAO {
 		return educlassDAO;
 	}
 		
+	//메소드
 	// 1) 등록
 	public void insertClass(EduClass eclass) {
 		try {
@@ -57,6 +58,7 @@ public class EduClassDAO extends DAO {
 		}
 	}
 
+	
 	// 2)  업데이트 변경   
 	public void updateMemberprof(EduClass eclass) {  // 교수변경
 		try {
@@ -90,8 +92,9 @@ public class EduClassDAO extends DAO {
 			disconnect();
 		}
 	}
-	///////////////// max_num  업데이트 변경
-	public void updateMembermaxNum(EduClass eclass) {  
+	
+
+	public void updateMembermaxNum(EduClass eclass) {  //max_num  업데이트 변경
 		try {
 			// 1. DB와 연결
 			connect();
@@ -123,8 +126,9 @@ public class EduClassDAO extends DAO {
 			disconnect();
 		}
 	}
-	///////////////// title 업데이트 변경
-	public void updateMemberTitle(EduClass eclass) {  
+	
+	
+	public void updateMemberTitle(EduClass eclass) {  /// title 업데이트 변경
 		try {
 			// 1. DB와 연결
 			connect();
@@ -157,8 +161,8 @@ public class EduClassDAO extends DAO {
 		}
 	}
 	
-	///////////////// 
-	public void updateMemberProfessor(EduClass eclass) {  
+
+	public void updateMemberProfessor(EduClass eclass) {  //교수변경
 		try {
 			// 1. DB와 연결
 			connect();
@@ -216,6 +220,7 @@ public class EduClassDAO extends DAO {
 		}
 	}
 	
+	
 	// 4) 강좌 이름 검색
 	public List<EduClass> selectClassTitle(String title) {
 		List<EduClass> list = new ArrayList<>();
@@ -228,11 +233,8 @@ public class EduClassDAO extends DAO {
 							+ "FROM education_class "
 							+ "WHERE title = '" + title +"'" 
 							+ "ORDER BY classNum" ;
-			
-
-			
+					
 			// 4. SQL 실행하기 - SELECT문
-			
 			rs = stmt.executeQuery(select);
 			
 			// 5. 결과값 처리하기
@@ -244,9 +246,7 @@ public class EduClassDAO extends DAO {
 				eclass.setMaxNum(rs.getInt("max_num"));
 				eclass.setCurrentNum(rs.getInt("current_num"));
 				list.add(eclass);
-			}
-			
-			
+			}		
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -255,6 +255,7 @@ public class EduClassDAO extends DAO {
 		}
 		return list;
 	}
+	
 	
 	// 5) 전체 강좌 검색
 	public List<EduClass> selectClassALL() {
@@ -283,7 +284,6 @@ public class EduClassDAO extends DAO {
 				eclass.setCurrentNum(rs.getInt("current_num"));
 				list.add(eclass);
 			}
-			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -323,8 +323,7 @@ public class EduClassDAO extends DAO {
 				eclass.setMaxNum(rs.getInt("max_num"));
 				eclass.setCurrentNum(rs.getInt("current_num"));
 			}
-			
-			
+		
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
