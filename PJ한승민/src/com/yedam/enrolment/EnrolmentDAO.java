@@ -6,6 +6,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yedam.java.center.CenterMember;
 import com.yedam.java.common.DAO;
 
 public class EnrolmentDAO extends DAO {
@@ -251,40 +252,136 @@ public class EnrolmentDAO extends DAO {
 	}
 	
 	// 검색 전체검색
-		public List<EnrolmentInfo> EnrolmentALL() {
-			List<EnrolmentInfo> list = new ArrayList<>();
-			try {
-				// 1. DB와 연결
-				connect();
-				
-				stmt = conn.createStatement();
-				
-				String select = "SELECT * "
-								+ "FROM enrolment "
-								+ "ORDER BY 1 ";
-				
-				// 4. SQL 실행하기 - SELECT문
-				
-				rs = stmt.executeQuery(select);
-				
-				// 5. 결과값 처리하기
-				while(rs.next()) {
-					EnrolmentInfo enrol = new EnrolmentInfo();
-					enrol.setMemberId(rs.getString("member_id"));
-					enrol.setClassTitle(rs.getString("class_title"));
-					list.add(enrol);
-				}
-
-			}catch(SQLException e) {
-				//e.printStackTrace();
-				System.out.println("정확한 과목명을 입력해주세요");
-			}finally {
-				//자원해제
-				disconnect();
+	public List<EnrolmentInfo> EnrolmentALL() {
+		List<EnrolmentInfo> list = new ArrayList<>();
+		try {
+			// 1. DB와 연결
+			connect();
+			
+			stmt = conn.createStatement();
+			
+			String select = "SELECT * "
+							+ "FROM enrolment "
+							+ "ORDER BY 1 ";
+			
+			// 4. SQL 실행하기 - SELECT문
+			
+			rs = stmt.executeQuery(select);
+			
+			// 5. 결과값 처리하기
+			while(rs.next()) {
+				EnrolmentInfo enrol = new EnrolmentInfo();
+				enrol.setMemberId(rs.getString("member_id"));
+				enrol.setClassTitle(rs.getString("class_title"));
+				list.add(enrol);
 			}
-			return list;
+
+		}catch(SQLException e) {
+			//e.printStackTrace();
+			System.out.println("정확한 과목명을 입력해주세요");
+		}finally {
+			//자원해제
+			disconnect();
 		}
+		return list;
+	}
 		
+	// 수강 과목수 조회
+	public int countClasstitle(String id) {
+		int result = 0;
+		int a = 0;
+		try {
+			// 1. DB와 연결
+			connect();
+
+			String countt  = " SELECT COUNT(*) as cnt FROM enrolment "
+					+ "WHERE member_id = '" + id +"' "
+					+ "GROUP BY member_id ";
+	
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(countt);
+			
+			if(rs.next()) {
+				a = rs.getInt("cnt");
+			}
+			
+			disconnect();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+//			System.out.println("왜안되지");
+		}
+		return a;
+	}
+	
+	
+//  클래스 타이틀    
+	public void updateCountClass(int i, String id) {  // 비밀번호 변경
+		try {
+			// 1. DB와 연결
+			connect();
+			
+			String update = "UPDATE center_member "
+					+ "SET COUNT_CLASS = ? "
+					+ "WHERE id = ? ";
+	
+			pstmt = conn.prepareStatement(update);
+			pstmt.setInt(1, i);
+			pstmt.setString(2, id);
+			
+			// 4. SQL 실행하기 - SELECT문
+			
+			int result = pstmt.executeUpdate();
+			
+			// 5. 결과값 처리하기
+			
+			System.out.println("UPDATE결과 : " + result);
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			//5.자원해제
+			disconnect();
+		}
+	}
+	
+	public String selectIDtitle(String id) {
+		String a = null;
+		try {
+			// 1. DB와 연결
+			connect();
+			
+			String select = "SELECT class_title "
+					+ "FROM enrolment "
+					+ "WHERE member_id = ? ";
+			
+			pstmt = conn.prepareStatement(select);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				a = rs.getString("class_title");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			//자원해제
+			disconnect();
+		}
+		return a;
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	// 1) 등록

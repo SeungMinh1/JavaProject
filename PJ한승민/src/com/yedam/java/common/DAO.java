@@ -11,7 +11,7 @@ public class DAO {
 	
 	//Oracle(DB) 연결정보
 		protected String jdbc_driver = "oracle.jdbc.driver.OracleDriver";
-		protected String oracleUrl = "jdbc:oracle:thin:@localhost:1521:xe";
+		protected String oracleUrl = "jdbc:oracle:thin:@192.168.0.14:1521:xe";
 		protected String connectedId = "hr";
 		protected String connectedPwd = "hr";
 		
@@ -21,7 +21,7 @@ public class DAO {
 		protected Statement stmt = null;
 		protected ResultSet rs = null;
 		
-		//생성자
+		//생성자       
 		protected DAO() {}
 		
 		//메소드

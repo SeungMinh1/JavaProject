@@ -181,46 +181,50 @@ public class CmemberDAO extends DAO {
 	}
 	
 	
-		// 5) 검색 전체검색
-		public List<CenterMember> selectMemberALL() {
-			List<CenterMember> list = new ArrayList<>();
-			try {
-				// 1. DB와 연결
-				connect();
-				
-				stmt = conn.createStatement();
-				
-				String select = "SELECT * "
-								+ "FROM center_member "
-								+ "ORDER BY id" ;
-				
-				// 4. SQL 실행하기 - SELECT문
-				
-				rs = stmt.executeQuery(select);
-				
-				// 5. 결과값 처리하기
-				while(rs.next()) {
-					CenterMember member = new CenterMember();
-					member.setId(rs.getString("id"));
-					member.setPwd(rs.getString("pwd"));
-					member.setName(rs.getString("name"));
-					member.setGender(rs.getString("gender"));
-					member.setBirthdate(rs.getDate("birthdate"));
-					member.setAddress(rs.getString("address"));
-					list.add(member);
-				}
-				
-				
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}finally {
-				//자원해제
-				disconnect();
+	// 5) 검색 전체검색
+	public List<CenterMember> selectMemberALL() {
+		List<CenterMember> list = new ArrayList<>();
+		try {
+			// 1. DB와 연결
+			connect();
+			
+			stmt = conn.createStatement();
+			
+			String select = "SELECT * "
+							+ "FROM center_member "
+							+ "ORDER BY id" ;
+			
+			// 4. SQL 실행하기 - SELECT문
+			
+			rs = stmt.executeQuery(select);
+			
+			// 5. 결과값 처리하기
+			while(rs.next()) {
+				CenterMember member = new CenterMember();
+				member.setId(rs.getString("id"));
+				member.setPwd(rs.getString("pwd"));
+				member.setName(rs.getString("name"));
+				member.setGender(rs.getString("gender"));
+				member.setBirthdate(rs.getDate("birthdate"));
+				member.setAddress(rs.getString("address"));
+				member.setCountTitle(rs.getInt("COUNT_CLASS"));
+				list.add(member);
 			}
-			return list;
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			//자원해제
+			disconnect();
 		}
-		
-
+		return list;
+	}
+	
+	
+	
+	
+	
 		
 		
 		/*

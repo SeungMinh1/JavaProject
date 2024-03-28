@@ -191,6 +191,24 @@ public class CmemManagement {
 		return changeaddress;
 	}
 	
+	
+	/*
+	private void updateContClass() {    
+		String Id = inputId();
+		CenterMember member = memberDAO.slectMember(Id);    
+		if(member == null) {
+			System.out.println("없는 정보입니다.");
+		}else {
+			System.out.println(member);
+			String changeaddress = inputaddress();
+			member.setAddress(changeaddress);
+			memberDAO.updateMemberaddress(member);
+			System.out.println("수정되었습니다.");
+		}
+		
+	
+	}
+	*/
 		
 	
 	

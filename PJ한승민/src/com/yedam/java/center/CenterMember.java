@@ -11,12 +11,19 @@ public class CenterMember {
 	private String gender;
 	private Date birthdate;
 	private String address;
+	private int countTitle;
 	
 	//생성자
 	
 	//메서드
 
 	
+	public int getCountTitle() {
+		return countTitle;
+	}
+	public void setCountTitle(int countTitle) {
+		this.countTitle = countTitle;
+	}
 	public String getId() {
 		return id;
 	}
@@ -58,7 +65,7 @@ public class CenterMember {
 	@Override
 	public String toString() {
 		return "CenterMember [id=" + id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", birthdate="
-				+ birthdate + ", address=" + address +"]";
+				+ birthdate + ", address=" + address + ", countTitle=" + countTitle + "]";
 	}
 	
 

@@ -16,18 +16,22 @@ public class EnrolmentMng {
 	
 	public void run() {
 		while(true) {
+			//System.out.println(enrolmentDAO.countClasstitle( (LoginControl.getLoginInfo().getId()) ));
+			//updateCountclassTitle();
+			//System.out.println(enrolmentDAO.countClasstitle( (LoginControl.getLoginInfo().getId()) ));
 			menuPrint();
 			
 			int menuNo = menuSelect();
 			
 			if(menuNo == 1) {
-				System.out.println("수강 가능한 강좌");
+				System.out.println("현재 개설딘 강좌");
 				selectClassALL();
 				
 			}else if(menuNo == 2) {
 				System.out.println("----------------------------------------------------------------------------");
 				selectClassALL();
 				insertEClass();
+				updateCountclassTitle();
 				
 			}else if(menuNo == 3) {
 				selectEnrolALL();
@@ -38,12 +42,14 @@ public class EnrolmentMng {
 				break;
 			}else {
 				System.out.println("메뉴에서 선택하세요");
+				
 			}
 		}
 		end();
 			
 	}
 	
+	//		System.out.println(enrolmentDAO.countClasstitle((LoginControl.getLoginInfo().getId())));
 	
 	private void selectClassALL(){
 		List<EduClass> list = educlassDAO.selectClassALL();
@@ -65,7 +71,7 @@ public class EnrolmentMng {
 	
 	private void menuPrint() {
 		String menu = "";
-		menu += "1.수강가능한 강좌보기 ";
+		menu += "1.개설된 강좌보기 ";
 		menu += "2.강의신청하기 ";
 		menu += "3.강의신청 목록 ";
 		menu += "4.강의신청 취소 ";
@@ -89,7 +95,13 @@ public class EnrolmentMng {
 	private void insertEClass() {
 		EnrolmentInfo enrol = inputAll();
 		if(enrolmentDAO.countMaxnum(enrol.getClassTitle()) >= enrolmentDAO.countCurrentnum(enrol.getClassTitle())) {
-			enrolmentDAO.insertEnrolment(enrol);
+			
+			if(enrol.getClassTitle().equals(enrolmentDAO.selectIDtitle(LoginControl.getLoginInfo().getId()) ) ){
+				System.out.println("이미 신청한 과목입니다.");
+			}else {
+				enrolmentDAO.insertEnrolment(enrol);
+			}
+			
 		}else {
 			System.out.println("더 이상 해당 강의를 신청할수 없습니다.");
 		}
@@ -114,15 +126,31 @@ public class EnrolmentMng {
 		}
 
 	}
+	/////////////////////////////////
+	private void selectEnrolTitle(String id) {
+		enrolmentDAO.selectIDtitle(id);
+	}
 	
 	private void deleteEnrolment() {
 		String title = inputTitle2();
 		enrolmentDAO.deleteEnrolment((LoginControl.getLoginInfo().getId()),title);
 	}
 	
+	private void updateCountclassTitle() {
+		String b = (LoginControl.getLoginInfo().getId() );
+		int a = enrolmentDAO.countClasstitle(b);
+		enrolmentDAO.updateCountClass(a, b);;
+	}
 	
 	
 	
+	/*
+	private void printCount() {
+		EnrolmentInfo enrol = new EnrolmentInfo();
+		enrol.setMemberId(LoginControl.getLoginInfo().getId());
+		System.out.println(enrolmentDAO.countClasstitle(enrol.getMemberId()));
+	}
+	*/
 	
 	
 /*

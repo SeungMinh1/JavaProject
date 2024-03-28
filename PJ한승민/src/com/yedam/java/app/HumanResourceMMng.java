@@ -23,6 +23,7 @@ public class HumanResourceMMng {
 			if (role == true) {  //관리자이면
 				int menu = selectMenu();
 				if (menu == 1) {
+					
 					new CmemManagement().run(); //회원관리
 				} else if (menu == 2) {
 					new EduManagement().run(); // 과목관리
@@ -36,7 +37,9 @@ public class HumanResourceMMng {
 				int menu = selectMenu();
 				if (menu == 1) {
 					new EnrolmentMng().run();  //수강신청
-				} else if (menu == 9) {
+				}if(menu == 2) {
+					new BoardMng().run();
+				}else if (menu == 9) {
 					end();
 					break;
 				} else {
@@ -54,6 +57,7 @@ public class HumanResourceMMng {
 			menu += "2.부서관리 ";
 		} else {
 			menu += "1. 수강신청 ";
+			menu += "2. 게시판 ";
 		}
 		menu += "9.로그아웃 ";
 		System.out.println("===========================================================");
