@@ -1,3 +1,5 @@
+
+------------------------------------------------------
 CREATE TABLE center_member(
     id VARCHAR2(20) PRIMARY KEY,
     pwd VARCHAR2(20) NOT NULL,
@@ -7,6 +9,9 @@ CREATE TABLE center_member(
     address VARCHAR2(100)
 
 );
+------------------------------------------------------
+ALTER TABLE center_member ADD COUNT_CLASS NUMBER(4,0) DEFAULT 0;
+--------------------------------------------------------------------
 COMMIT;
 
 insert into center_member (id, pwd, name,gender, birthdate, address)
@@ -19,7 +24,7 @@ SELECT *
 FROM center_member;
 DROP TABLE center_member;
 
-
+------------------------------------------------------
 CREATE TABLE education_class(
     classNum NUMBER(5,0) PRIMARY KEY, 
     title VARCHAR2(20) UNIQUE,
@@ -27,36 +32,37 @@ CREATE TABLE education_class(
     max_num NUMBER(4,0),
     current_num NUMBER(4,0) 
 );
-
-
-insert into education_class (classNum, title, professor, max_num)
-VALUES (1, '국어', '홍길동',  5);
+------------------------------------------------------
 
 insert into education_class (classNum, title, professor, max_num)
-VALUES (2, '영어', '홍길동',  5);
+VALUES (1, '국어', '김박사',  5);
 
 insert into education_class (classNum, title, professor, max_num)
-VALUES (3, '수학', '홍길동',  5);
+VALUES (2, '영어', '홍길동',  4);
 
-SELECT *
-FROM education_class
-WHERE title = '국어'
-ORDER BY classNum;
+insert into education_class (classNum, title, professor, max_num)
+VALUES (3, '수학', '이박사',  5);
+
 
 DROP TABLE education_class;
 
 
-
+------------------------------------------------------
 CREATE TABLE enrolment(
     member_id VARCHAR(20) NOT NULL,
     class_title VARCHAR(20) NOT NULL,
     FOREIGN KEY(member_id) REFERENCES center_member(id),
     FOREIGN KEY(class_title) REFERENCES education_class(title)
 );
-
-
+------------------------------------------------------
 
 DROP TABLE enrolment;
+
+SELECT COUNT(*) as cnt
+FROM enrolment
+WHERE MEMBER_ID = '12'
+GROUP BY MEMBER_ID;
+
 
 INSERT INTO enrolment (member_id, class_title)
 VALUES('12', '영어');
@@ -83,18 +89,20 @@ FROM education_class;
 SELECT max_num
 FROM education_class
 WHERE title = '국어';
-
+-------------------------------------------
 UPDATE education_class
 SET current_num = 0
-WHERE title = '영어';
+WHERE title = '수학';
 
 UPDATE education_class
 SET current_num = 0
 WHERE title = '국어';
 
-UPDATE center_member
-SET current_num = 6
+UPDATE education_class
+SET current_num = 0
 WHERE title = '영어';
+---------------------------------------
+
 
 SELECT  c.id,
         c.pwd, 
@@ -107,6 +115,18 @@ FROM center_member c
     LEFT OUTER JOIN enrolment e
         ON c.id = e.member_id;
 
-SELECT COUNT(id) AS cnt
-FROM table_ggmouse
-GROUP BY nam
+
+
+
+--------------------------------------------------------------
+CREATE TABLE boardVO(
+    board_title VARCHAR2(30),
+    member_id VARCHAR2(20),
+    content VARCHAR2(1000),
+    write_date DATE DEFAULT SYSDATE,
+    FOREIGN KEY(member_id) REFERENCES center_member(id)
+);
+
+----------------------------------------------------------------
+DROP TABLE boardVO;
+SELECT board_title, member_id, write_date;
