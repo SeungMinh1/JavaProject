@@ -43,6 +43,7 @@ public class MainServlet extends HttpServlet {
 		out.print("<a href='info/resume.html'> resume로 이동 </a>");
 		*/
 		
+		/* delete
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		BoardVO board = new BoardVO();
 		board.setBoardNo(bno);
@@ -56,8 +57,22 @@ public class MainServlet extends HttpServlet {
 		}else {
 			response.getWriter().println("NG");
 		}
+		*/
+
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		String title = request.getParameter("title");
+		BoardVO board = new BoardVO();
+		board.setBoardNo(bno);
+		board.setTitle(title);
+		System.out.println("title : "+ title );
+		SqlSession session = DataSource.getInstance().openSession(true);
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
 		
-		
+		if(mapper.updateBoard(board) == 1) {
+			response.getWriter().println("OK");
+		}else {
+			response.getWriter().println("NG");
+		}
 		
 	}
 

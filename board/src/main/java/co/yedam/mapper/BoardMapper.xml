@@ -24,5 +24,20 @@
  delete from tbl_board
  where board_no = #{bno}
  </delete>
+ 
+  <update id="updateBoard" parameterType="co.yedam.vo.BoardVO">
+ 	update tbl_board 
+ 	set title = #{title}, 
+ 		content = #{content}
+	where board_no = #{boardNo}
+
+ </update>
+ 
+ <select id ="getBoard" parameterType="int" resultType="co.yedam.vo.BoardVO">
+ 	select *
+ 	from tbl_board
+ 	where board_no = #{bno}
+ </select>
+
 
 </mapper>
