@@ -10,18 +10,21 @@
 	BoardVO vo = (BoardVO) request.getAttribute("bvo");
 %>
 	<form action="modifyBoard.do">
-	<input type="hidden" name="boardNo" value="<%=vo.getBoardNo() %>">
-	<table border="2" class="table">
+	<input type="hidden" name="boardNo" value="${bvo.boardNo }">
+	<input type="hidden" name="page" value="${page }">
+	<input type="hidden" name="searchCondition" value="${searchCondition }">
+	<input type="hidden" name="keyword" value="${keyword }">
+	<table class="table">
 		<tr>
-			<th>글번호</th><td><%=vo.getBoardNo() %></td>
-			<th>글제목</th><td><input type="text" name="title" value="<%=vo.getTitle() %>"></td>
+			<th>글번호</th><td>${bvo.boardNo }</td>
+			<th>글제목</th><td><input type="text" name="title" value="${bvo.title }"></td>
 		</tr>
 		<tr>
-			<th>글내용</th><td colspan="3"><textarea name="content"><%=vo.getContent() %></textarea></td>
+			<th>글내용</th><td colspan="3"><textarea name="content">${bvo.content }</textarea></td>
 		</tr>
 		<tr>
-			<th>작성자</th><td><%=vo.getWriter() %></td>
-			<th>작성일시</th><td><%=vo.getCreateDate() %></td>
+			<th>작성자</th><td>${bvo.writer }</td>
+			<th>작성일시</th><td>${bvo.createDate }</td>
 		</tr>
 		<tr>
 			<td colspan="4">

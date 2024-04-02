@@ -22,7 +22,7 @@ public class AppTest {
 		System.out.println(result);
 		
 		List<BoardVO> list = //session.selectList("co.yedam.mapper.BoardMapper.selectList");
-							mapper.selectList();
+							mapper.selectList(1);
 		list.forEach(board ->{
 			System.out.println(board.toString());
 		});
