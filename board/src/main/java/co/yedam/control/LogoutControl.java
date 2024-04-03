@@ -5,19 +5,20 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.yedam.common.Control;
 
-public class RemoveBoardForm implements Control {
+public class LogoutControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//req.getRequestDispatcher("WEB-INF/view/boardForm.jsp").forward(req, resp);
-		String bno = req.getParameter("bno");
 		
-		req.setAttribute("bno", bno);
+		HttpSession session = req.getSession();
+		session.invalidate();
 		
-		req.getRequestDispatcher("board/removeForm.tiles").forward(req, resp);
+		resp.sendRedirect("loginForm.do");
+
 	}
 
 }

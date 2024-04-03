@@ -50,6 +50,12 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.deleteBoard(bno) == 1;
 	}
 
+	@Override
+	public boolean addcnt(int bno) {
+		
+		return mapper.getcnt(bno) == 1;
+	}
+
 
 	
 	

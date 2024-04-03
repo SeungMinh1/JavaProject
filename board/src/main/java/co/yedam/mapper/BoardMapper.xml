@@ -33,7 +33,7 @@
 	from(select rownum rn, b.*
 	    from tbl_board b
 	    <include refid="searchCond"></include>
-	    order by board_no) a
+	    order by board_no desc) a
 	where rn > (#{page} - 1)* 5 
 	<![CDATA[
 	and rn <= (#{page} * 5)
@@ -48,8 +48,8 @@
  </select>
  
  <insert id="insertBoard" parameterType="co.yedam.vo.BoardVO">
- 	insert into tbl_board (board_no, title, content, writer)
-	values(board_seq.nextval, #{title}, #{content}, #{writer})
+ 	insert into tbl_board (board_no, title, content, writer, img)
+	values(board_seq.nextval, #{title}, #{content}, #{writer}, #{img})
  
  </insert>
  
@@ -72,5 +72,10 @@
  	where board_no = #{bno}
  </select>
 
+<update id="getcnt" parameterType="co.yedam.vo.BoardVO">
+	update tbl_board
+	set view_cnt = view_cnt+1
+	where board_no = #{bno}
+</update>
 
 </mapper>

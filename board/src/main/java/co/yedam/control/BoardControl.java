@@ -24,9 +24,11 @@ public class BoardControl implements Control {
 
 		
 		String bno = req.getParameter("bno");
+		
 		//db정보 조회 후 -> boardList.jsp 출력
 		BoardService svc = new BoardServiceImpl();
 		
+		svc.addcnt(Integer.parseInt(bno));
 		BoardVO vo = svc.getBoard(Integer.parseInt(bno));
 		
 		req.setAttribute("bvo", vo);
@@ -37,7 +39,7 @@ public class BoardControl implements Control {
 
 		
 		//페이지 재지정.
-		req.getRequestDispatcher("WEB-INF/view/board.jsp").forward(req, resp);;
+		req.getRequestDispatcher("board/board.tiles").forward(req, resp);;
 
 	}
 

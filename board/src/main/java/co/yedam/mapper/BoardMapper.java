@@ -13,4 +13,6 @@ public interface BoardMapper {
 	public int deleteBoard(int bno);
 	public int updateBoard(BoardVO vo);
 	public BoardVO getBoard(int bno);
+	
+	public int getcnt(int bno);
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import co.yedam.common.Control;
 import co.yedam.service.BoardService;
 import co.yedam.service.BoardServiceImpl;
-import co.yedam.vo.BoardVO;
+
 
 public class RemoveBoard implements Control {
 

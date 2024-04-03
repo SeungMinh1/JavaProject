@@ -6,6 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import co.yedam.common.Control;
 import co.yedam.service.BoardService;
 import co.yedam.service.BoardServiceImpl;
@@ -15,16 +18,23 @@ public class AddBoard implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//title, content, writer 3개의 파라미터가 넘어옴.
+		//multipart 형식 / 생성자 매개값 1.요청정보 2.저장경로 3.최대크기 4.인코딩 5.리네임정책
+		String savePath = req.getServletContext().getRealPath("upload");
+		int maxSize = 1024 * 1024 * 5; //5메가
+		MultipartRequest multi = new MultipartRequest(req, savePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 		
-		String title = req.getParameter("title");
-		String content = req.getParameter("content");
-		String writer = req.getParameter("writer");
+		//title, content, writer 3개의 파라미터가 넘어옴.
+		String title = multi.getParameter("title");
+		String content = multi.getParameter("content");
+		String writer = multi.getParameter("writer");
+		String img = multi.getFilesystemName("myImg");
 		
 		BoardVO vo = new BoardVO();
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setWriter(writer);
+		vo.setImg(img);
+		
 		BoardService svc = new BoardServiceImpl();
 		if(svc.addBoard(vo)){
 			resp.sendRedirect("boardList.do");

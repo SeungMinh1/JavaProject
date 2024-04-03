@@ -35,7 +35,7 @@ public class ModifyBoardForm implements Control {
 		req.setAttribute("bvo", bvo);
 		
 		
-		req.getRequestDispatcher("WEB-INF/view/ModifyForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("board/ModifyForm.tiles").forward(req, resp);
 	}
 
 }
