@@ -12,13 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.control.AddBoard;
 import co.yedam.control.AddBoardForm;
+import co.yedam.control.AddMember;
+import co.yedam.control.AddMemberForm;
 import co.yedam.control.BoardControl;
 import co.yedam.control.BoardListControl;
+import co.yedam.control.DomForm;
 import co.yedam.control.LoginControl;
 import co.yedam.control.LoginFormControl;
 import co.yedam.control.LogoutControl;
+import co.yedam.control.MemberDataControl;
+import co.yedam.control.MemberListControl;
 import co.yedam.control.ModifyBoard;
 import co.yedam.control.ModifyBoardForm;
+import co.yedam.control.ProductListControl;
 import co.yedam.control.RemoveBoard;
 import co.yedam.control.RemoveBoardForm;
 
@@ -55,6 +61,19 @@ public class FrontControl extends HttpServlet{
 		map.put("/login.do", new LoginControl());
 		map.put("/logout.do", new LogoutControl());
 		
+		//회원가입 기능
+		map.put("/addMemberForm.do", new AddMemberForm());
+		map.put("/addMember.do", new AddMember());
+		
+		//회원 목록 조회
+		map.put("/memberList.do", new MemberListControl());
+		
+		//json 데이터 생성
+		map.put("/domForm.do", new DomForm());
+		map.put("/memberData.do", new MemberDataControl());
+		
+		//상품
+		map.put("/productList.do", new ProductListControl());
 	}
 	
 	

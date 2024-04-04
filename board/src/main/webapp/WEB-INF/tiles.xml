@@ -28,7 +28,7 @@
   
   
   <!-- Admin용 -->
-    <definition name="adminapp" template="/WEB-INF/layout/admin_temp.jsp">
+   <definition name="adminapp" template="/WEB-INF/layout/admin_temp.jsp">
     <put-attribute name="title" value="Tiles Template Homepage" />
     <put-attribute name="nav" value="/WEB-INF/layout/admin_nav.jsp" />
     <put-attribute name="menu" value="/WEB-INF/layout/admin_menu.jsp" />
@@ -36,17 +36,29 @@
     <put-attribute name="footer" value="/WEB-INF/layout/admin_footer.jsp" />
   </definition>
   
+  <!--  product -->   <!-- 상품관련 header/body/footer  product.homepage -->
+  <definition name="prodapp" template="/WEB-INF/layout/prod/prod_temp.jsp">
+    <put-attribute name="title" value="Tiles Template Homepage" />
+    <put-attribute name="header" value="/WEB-INF/layout//prod/prod_header.jsp" />
+    <put-attribute name="body" value="/WEB-INF/layout/prod/prod_body.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/layout/prod/prod_footer.jsp" />
+  </definition>
+  
   <definition name="WILDCARD:member/*" extends="adminapp">
   	<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"></put-attribute>
   </definition>
   
-    <definition name="WILDCARD:*/*" extends="boardapp">
+  <definition name="WILDCARD:*/*" extends="boardapp">
   	<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"></put-attribute>
   </definition>
   
+  <!-- productList.do =>  product/productList.tiles =>  WEB-INF/view/prod/{1}.jsp-->
+  <definition name="WILDCARD:prod/*" extends="prodapp">
+  	<put-attribute name="body" value="/WEB-INF/view/prod/{1}.jsp"></put-attribute>
+  </definition>
   
-  
-  
+
+
   
   
   

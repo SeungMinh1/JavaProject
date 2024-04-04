@@ -12,4 +12,19 @@
 	and member_pw = #{memberPw}
 	</select>
 	
+	<insert id="insertMember" parameterType="co.yedam.vo.MemberVO">
+	insert into tbl_member (member_id, member_pw, member_nm, phone)
+	values (#{memberId}, #{memberPw}, #{memberNm}, #{phone})
+	</insert>
+	
+	 <select id="selectList" parameterType="co.yedam.vo.MemberVO">
+		select *
+		from tbl_member
+	 </select>
+	 
+	 <select id="prodList" parameterType="co.yedam.vo.ProdVO">
+		select *
+		from tbl_product
+	 </select>
+	 
 </mapper>
