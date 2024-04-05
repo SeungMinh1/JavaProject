@@ -20,7 +20,7 @@ public class ProductListControl implements Control {
 		MemberService svc = new MemberServiceImpl();
 		List<ProdVO> list = svc.prodList();
 		req.setAttribute("plist", list);
-		req.getRequestDispatcher("prod/productList.tiles").forward(req, resp);
+		req.getRequestDispatcher("prod/prodList.tiles").forward(req, resp);
 		
 		
 

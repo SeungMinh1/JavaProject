@@ -15,26 +15,28 @@
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/prod-styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Navigation-->
-		
-		<tiles:insertAttribute name="header" />
-	
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<tiles:insertAttribute name="menu" />
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <tiles:insertAttribute name="header" />
+        </header>
         <!-- Section-->
         <section class="py-5">
-            
             <tiles:insertAttribute name="body" />
-            
         </section>
         <!-- Footer-->
-
-		<tiles:insertAttribute name="footer" />
-		
+        <footer class="py-5 bg-dark">
+            <tiles:insertAttribute name="footer" />
+        </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="js/prod-scripts.js"></script>
     </body>
 </html>
