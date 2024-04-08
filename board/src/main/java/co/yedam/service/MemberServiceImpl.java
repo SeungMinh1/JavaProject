@@ -36,4 +36,10 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.prodList();
 	}
 
+	@Override
+	public boolean removeMember(String mid) {
+		
+		return mapper.deleteMember(mid) == 1;
+	}
+
 }

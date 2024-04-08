@@ -39,12 +39,17 @@
 			<td colspan="2" align="center">
 				<button id="addBtn">저장</button>
 			</td>
+			<td  align="left" class = "btn btn-primary">
+			<button id = "updBtn">수정</button>
+			</td>
 		</tr>
 	</table>
 
 </form>
+
 <div id="show">
-	<table border='1' class = 'table'>
+	<input id=''>
+	<table border='1' class = 'table' >
 		<thead id="header"/>
 		<tbody id="list" />	
 	
@@ -52,6 +57,15 @@
 
 </div>
 
+<span id="timer"></span>
 
-<script src="js/mock_data.js"></script>
+
+
+
+<!--  <script src="js/mock_data.js"></script>
 <script src="js/member.js"></script>
+-->
+
+<!--<script src="js/string.js"></script>-->
+<!--<script src="js/array.js"></script> -->
+<script src="js/ajax.js"></script> 

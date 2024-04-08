@@ -15,4 +15,5 @@ public interface MemberMapper {
 	public List<ProdVO> prodList();
 	//상품목록
 	
+	public int deleteMember(String mid);
 }

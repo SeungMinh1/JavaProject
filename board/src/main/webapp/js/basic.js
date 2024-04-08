@@ -28,6 +28,7 @@
   result = sum3([10, 20, 30]);
   console.log(result);
 
+
  function showDay(day = []){
 	
   	let tr = document.createElement('tr');
@@ -86,6 +87,7 @@
  function getSpaces(month = 1){
 	 switch(month){
 		 case 1: return 1;
+		 case 3: return 5;
 		 case 4: return 1; 
 		 case 5: return 3; 
 	 }
@@ -94,8 +96,10 @@
  function getLastDate(month = 1){
 	 switch(month){
 		 case 1: return 31;
+		 case 3: return 31;
 		 case 4: return 30;
 		 case 5: return 31;
+		 case 6: return 30;
 	 }
  }
   

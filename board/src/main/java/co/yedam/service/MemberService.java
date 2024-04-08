@@ -11,4 +11,5 @@ public interface MemberService {
 	boolean addMember(MemberVO mvo);
 	List<MemberVO> memberList();
 	List<ProdVO> prodList();
+	public boolean removeMember(String mid);
 }

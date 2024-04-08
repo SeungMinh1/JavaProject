@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import co.yedam.control.AddBoard;
 import co.yedam.control.AddBoardForm;
 import co.yedam.control.AddMember;
+import co.yedam.control.AddMemberAjax;
 import co.yedam.control.AddMemberForm;
 import co.yedam.control.BoardControl;
 import co.yedam.control.BoardListControl;
@@ -20,13 +21,16 @@ import co.yedam.control.DomForm;
 import co.yedam.control.LoginControl;
 import co.yedam.control.LoginFormControl;
 import co.yedam.control.LogoutControl;
+import co.yedam.control.MemberAjax;
 import co.yedam.control.MemberDataControl;
+import co.yedam.control.MemberForm;
 import co.yedam.control.MemberListControl;
 import co.yedam.control.ModifyBoard;
 import co.yedam.control.ModifyBoardForm;
 import co.yedam.control.ProductListControl;
 import co.yedam.control.RemoveBoard;
 import co.yedam.control.RemoveBoardForm;
+import co.yedam.control.RemoveMemberConrtol;
 
 
 //init -> service -> destroy
@@ -74,6 +78,12 @@ public class FrontControl extends HttpServlet{
 		
 		//상품
 		map.put("/productList.do", new ProductListControl());
+		
+		map.put("/memberForm.do", new MemberForm());
+		map.put("/memberAjax.do", new MemberAjax());
+		map.put("/removeMember.do", new RemoveMemberConrtol());
+		map.put("/addMemberAjax.do", new AddMemberAjax());
+		
 	}
 	
 	
