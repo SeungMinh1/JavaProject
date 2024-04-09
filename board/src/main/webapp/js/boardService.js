@@ -1,24 +1,25 @@
 /**
- * service.js
+ * 
  */
 
-const fields = ['memberId', 'memberPw', 'memberNm', 'phone'];
 
-function makeRow(member ={}){
+const fields = ['boardNo', 'title', 'content', 'writer'];
+
+function makeRow(member={}){
+	
 	let tr = document.createElement('tr');
-	//td생성
-  	fields.forEach(elem=>{
-	  let td = document.createElement('td');
-	  td.innerText = member[elem] == undefined ? '':member[elem];
-	  tr.appendChild(td);
+	
+	fields.forEach(elem=>{
+		let td = document.createElement('td');
+		td.innerText = member[elem];
+		tr.appendChild(td);
 	})
 	
 	let btn = document.createElement('button');
 	btn.innerText = '삭제';
 	btn.addEventListener('click', function(e){
-		//데이터 삭제후 화면삭제
 		const delHtp = new XMLHttpRequest();
-		delHtp.open('get', 'removeMember.do?mid=' + member.memberId);
+		delHtp.open('get', 'removeBoardAjax.do?boardN='+member.boardNo);
 		delHtp.send();
 		delHtp.onload = function(){
 			let result = JSON.parse(delHtp.response);
@@ -32,18 +33,17 @@ function makeRow(member ={}){
 			}
 		}
 	})
-	
 	let td = document.createElement('td');
 	td.append(btn);
 	tr.append(td);
 	return tr;
 }
 
+
 //Ajax 호출`
 const xhtp = new XMLHttpRequest();
-xhtp.open('get', 'memberAjax.do');
+xhtp.open('get', 'boardAjax.do');
 xhtp.send();
-
 
 xhtp.onload = function(){
 	let members = JSON.parse(xhtp.response);
@@ -51,24 +51,40 @@ xhtp.onload = function(){
 	members.forEach(member =>{
 		document.getElementById('list').appendChild(makeRow(member));
 	})
+	
 }
 
 //등록버튼
 document.getElementById('addBtn').addEventListener('click', function(e){
-	let id = document.getElementById('mid').value;
-	let nm = document.getElementById('mname').value;
-	let ps = document.getElementById('mpw').value;
-	let ph = document.getElementById('phone').value;
+	//let boardNO = document.getElementById('boardN').value;
+	let tit = document.getElementById('title').value;
+	let cont = document.getElementById('content').value;
+	let wri = document.getElementById('writer').value;
 	
 	const addHtp = new XMLHttpRequest();
-	addHtp.open('get', 'addMemberAjax.do?mid='+id+'&name='+nm+'&pass='+ps+'&phone='+ph);
+	addHtp.open('get','addBoardAjax.do?title='+tit+'&content='+cont+'&writer='+wri);
 	addHtp.send();
 	addHtp.onload = function(){
 		let result = JSON.parse(addHtp.response);
-		const obj = {memberId:id, memberPw:ps, memberNm:nm, phone:ph};
+		const obj = {title:tit, content:cont, writer:wri};
 			if(result.retCode == 'Success'){
 				alert('등록성공');
-				document.getElementById('list').append(makeRow(obj));
+				
+				document.querySelector('#show>table>tbody').innerHTML='';
+				const xhtp = new XMLHttpRequest();
+				xhtp.open('get', 'boardAjax.do');
+				xhtp.send();
+				
+				xhtp.onload = function(){
+					let members = JSON.parse(xhtp.response);
+					console.log(members);
+					members.forEach(member =>{
+						document.getElementById('list').appendChild(makeRow(member));
+					})
+					
+				}
+				//document.getElementById('list').append(makeRow(obj));
+				
 			}else if(result.retCode == 'Fail'){
 				alert('등록중 에러.');
 			}else{
@@ -77,17 +93,6 @@ document.getElementById('addBtn').addEventListener('click', function(e){
 		
 	}
 })
-
-
-
-///게시글 등록 삭제 게시글ajax
-
-
-
-
-
-
-
 
 
 

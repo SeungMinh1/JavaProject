@@ -25,6 +25,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="domForm.do">DOM연습</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="productList.do">상품</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberForm.do">member(ajax)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardAform.do">board(ajax)</a>
                 </div>
             </div>
             

@@ -40,6 +40,12 @@
 	]]>
  </select>
  
+ <select id="selectList2" parameterType="co.yedam.vo.BoardVO">
+ 	select *
+ 	from tbl_board
+ 	order by board_no desc
+ </select>
+ 
  <select id="selectCount" parameterType="co.yedam.common.SearchVO" resultType="int">
  select count(1)
  from tbl_board
@@ -48,8 +54,8 @@
  </select>
  
  <insert id="insertBoard" parameterType="co.yedam.vo.BoardVO">
- 	insert into tbl_board (board_no, title, content, writer, img)
-	values(board_seq.nextval, #{title}, #{content}, #{writer}, #{img})
+ 	insert into tbl_board (board_no, title, content, writer) <!--img #{img} -->
+	values(board_seq.nextval, #{title}, #{content}, #{writer})
  
  </insert>
  

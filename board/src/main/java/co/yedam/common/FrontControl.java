@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.control.AddBoard;
+import co.yedam.control.AddBoardAjax;
 import co.yedam.control.AddBoardForm;
 import co.yedam.control.AddMember;
 import co.yedam.control.AddMemberAjax;
@@ -29,8 +30,13 @@ import co.yedam.control.ModifyBoard;
 import co.yedam.control.ModifyBoardForm;
 import co.yedam.control.ProductListControl;
 import co.yedam.control.RemoveBoard;
+import co.yedam.control.RemoveBoardControl;
 import co.yedam.control.RemoveBoardForm;
 import co.yedam.control.RemoveMemberConrtol;
+import co.yedam.control.RemoveReply;
+import co.yedam.control.ReplyList;
+import co.yedam.control.boardAform;
+import co.yedam.control.boardAjax;
 
 
 //init -> service -> destroy
@@ -81,8 +87,17 @@ public class FrontControl extends HttpServlet{
 		
 		map.put("/memberForm.do", new MemberForm());
 		map.put("/memberAjax.do", new MemberAjax());
+		
 		map.put("/removeMember.do", new RemoveMemberConrtol());
 		map.put("/addMemberAjax.do", new AddMemberAjax());
+		
+		map.put("/boardAform.do", new boardAform());
+		map.put("/boardAjax.do", new boardAjax());
+		map.put("/removeBoardAjax.do",new RemoveBoardControl());
+		map.put("/addBoardAjax.do", new AddBoardAjax());
+		
+		map.put("/replyList.do", new ReplyList()); //목록 json
+		map.put("/removeReply.do", new RemoveReply()); //댓글삭제 json
 		
 	}
 	

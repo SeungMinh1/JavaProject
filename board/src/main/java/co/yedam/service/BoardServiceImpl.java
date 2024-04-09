@@ -56,6 +56,12 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getcnt(bno) == 1;
 	}
 
+	@Override
+	public List<BoardVO> boardList2() {
+		
+		return mapper.selectList2();
+	}
+
 
 	
 	

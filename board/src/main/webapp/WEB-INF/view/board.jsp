@@ -5,7 +5,24 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<style>
+  div.reply div{
+  	margin: auto;
+  }
+  div.reply ul{
+  	list-style-type:none;
+  	margin-top:10px;
+  }
+  div.reply li{
+  	padding-top:1px;
+  	padding-bottom:1px;
+  }
+  div.reply span{
+    display:inline-block;
+ 
+  }
 
+</style>
 
 
 	<%
@@ -48,23 +65,50 @@
 		
 	</table>
 	</form>
-<script>
-	function deleteFormFunc(){
-		document.forms[0].action="removeForm.do";
-		console.dir(document.forms[0].action);
-		document.forms[0].submit();
-	}
 	
-	//submitForm
+	<div class="container reply">
+	<!--  등록 -->
+	  <div class="content">
+	  	<ul>
+	  		<li>
+	  		  <span class="col-sm-2">글번호</span>
+	  		  <span class="col-sm-5">댓글내용</span>   <!-- 6 -->
+	  		  <span class="col-sm-2">작성자</span>
+	  		  <button class="col-sm-2">삭제</button>
+	  		</li>
+	  		<li>
+	  		  <hr />
+	  		</li>
+	  		<li style="display:none">
+	  		  <span class="col-sm-2">12</span>
+	  		  <span class="col-sm-5">댓글입니다.</span>
+	  		  <span class="col-sm-2">user10</span>
+	  		  <button class="col-sm-2">삭제</button>
+	  		</li>
+	  	</ul>
+	  
+	  
+	  </div>
+	
+	
+	<!-- 댓글 목록 -->
+	
+	  <div class="footer">
+	    <div class="center">
+	      <div class="pagination">
+	       
+	      </div>
+	    </div>
+	  </div>
+</div>
+	
+
+<!-- 
+<script src ="js/boardService2.js"></script> -->
+<script type="module" src="js/board.js"></script>
+
+<script>
 	const logId = "${logId}";
 	const writer = "${bvo.writer}";
-	document.querySelector('form[name="submitForm"]').addEventListener('submit', function(e){
-		e.preventDefault(); //기본기능 차단
-		if(logId == writer){
-			this.submit();
-		}else{
-			alert('권한이 없습니다.');
-		}
-	})
+	const bno = "${bvo.boardNo}";
 </script>
-
