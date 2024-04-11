@@ -8,9 +8,9 @@ const n2 = 200;
 
 const svc = {
 	//매소드
-	replyList(bno =1, successCall){
+	replyList(param = {bno: 1,  page: 1}, successCall){
 		let xhtp = new XMLHttpRequest();
-		xhtp.open('get', 'replyList.do?bno=' + bno);
+		xhtp.open('get', 'replyList.do?bno=' + param.bno + '&page=' +  param.page);
 		xhtp.send();
 		xhtp.onload = function(){
 			let result = JSON.parse(xhtp.response);
@@ -30,8 +30,29 @@ const svc = {
 			}
 		}
 		
+	},
+	//페이징 목록
+	pagigList(bno=1, successCall){
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('get', 'replyCount.do?bno=' +bno);
+		xhtp.send();
+		xhtp.onload = function(){
+			let result = JSON.parse(xhtp.response); // "json" -> obj.
+			successCall(result);
+			
+		}
+	},
+	addReply(rvo={bno, reply, replyer}, successCall){
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('post', 'addReply.do');
+		xhtp.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+		xhtp.send('bno='+rvo.bno+'&reply='+rvo.reply+'&replyer='+rvo.replyer);
+		xhtp.onload = function(){
+			let result = JSON.parse(xhtp.response);
+			successCall(result);
+		}
 	}
-}
+} //end of svc
 
 
 export {svc};

@@ -1,5 +1,6 @@
 <%@page import="co.yedam.common.SearchVO"%>
 <%@page import="co.yedam.vo.BoardVO"%>
+<%@page import="co.yedam.vo.ReplyVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,13 +22,43 @@
     display:inline-block;
  
   }
+</style>
+<style>
+.center {
+  text-align: center;
+}
 
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
 
 
 	<%
 		BoardVO vo = (BoardVO) request.getAttribute("bvo");
 	%>
+	  
+	<!-- ReplyVO rvo = (ReplyVO) request.getAttribute("rvo"); -->
+
+
 	<h3>상세 페이지</h3>
 	<form name="submitForm" action="modifyForm.do">
 	<input type="hidden" name="bno" value="${bvo.boardNo }">
@@ -68,6 +99,13 @@
 	
 	<div class="container reply">
 	<!--  등록 -->
+	<div class="header">
+		<input class="col-sm-8" id="reply">
+		<button class="col-sm-3" id="addReply">댓글등록</button>
+	
+	</div>
+	
+	<!-- 댓글목록 -->
 	  <div class="content">
 	  	<ul>
 	  		<li>
@@ -83,7 +121,7 @@
 	  		  <span class="col-sm-2">12</span>
 	  		  <span class="col-sm-5">댓글입니다.</span>
 	  		  <span class="col-sm-2">user10</span>
-	  		  <button class="col-sm-2">삭제</button>
+	  		 <button class="col-sm-2">삭제</button>
 	  		</li>
 	  	</ul>
 	  
@@ -96,7 +134,9 @@
 	  <div class="footer">
 	    <div class="center">
 	      <div class="pagination">
-	       
+	         <a href="# id="fir">1</a>
+	         <a href="#" class="active">2</a>
+	         <a href="#">3</a>
 	      </div>
 	    </div>
 	  </div>

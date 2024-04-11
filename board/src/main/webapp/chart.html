@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+     let url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=MRtDjOHLVKJj%2BnUSKi%2BnGTXsL%2BVunB3JSDGLQYBUpZX6Q7gORBGET6APk%2Bt9KANSuuHfDJAs5k5iIuFEOViOKA%3D%3D';
+     let xhtp = new XMLHttpRequest();
+     xhtp.open('get', url);
+     xhtp.send();
+     xhtp.onload = function(){
+    	 console.log(JSON.parse(xhtp.response));
+       let result = JSON.parse(xhtp.response);
+       const allData = result.data;
+       result.data.forEach(center => {
+          document.getElementById('list').append(makeRow(center));    
+       });
+     }
+
+     document.addEventListener('DOMContentLoaded', function(e){
+        let show = document.getElementById('show');
+        console.log('==>1', show);
+
+     })
+
+     //center정보 한건에 대한 tr생성해주는 함수
+     function makeRow(center){
+        let tr = document.createElement('tr');
+        let fields = ['id', 'centerName', 'address', 'phoneNumber'];
+        fields.forEach(field =>{
+          let td = document.createElement('td');
+          td.innerText = center[field];
+          tr.appendChild(td);
+        })
+        return tr;
+     }
+
+
+     document.getElementById('findBtn').addEventListener('click', function(e){
+        let searchValue = document.getElementById('keyword').value; //indexOf?
+        allData.center.centerName.forEach(elem =>{
+          if(elem.indexOf(searchValue) == true){
+            console.log('1');
+          }else console.log('0');
+        })
+        })
+    </script>
+  </head>
+  <body>
+    <div id="show"></div>
+      <input type="text" id="keyword">
+      <button id="findBtn">검색</button>
+      <table class="table">
+        <tbody id="list">
+          <tr>
+            <th>센터id</th><th>센터명</th><th>센터주소</th><th>연락처</th>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+
+
+  </body>
+</html>

@@ -10,5 +10,8 @@ public class SearchVO {
 	private String keyword;
 		
 
-
+	//댓글관련
+	private int rpage;
+	private int bno;
+	
 }

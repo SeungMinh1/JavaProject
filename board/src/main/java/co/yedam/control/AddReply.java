@@ -1,7 +1,8 @@
 package co.yedam.control;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,36 +12,41 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import co.yedam.common.Control;
-import co.yedam.common.SearchVO;
 import co.yedam.service.ReplyService;
 import co.yedam.service.ReplyServiceImpl;
 import co.yedam.vo.ReplyVO;
 
-public class ReplyList implements Control {
+public class AddReply implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		resp.setContentType("text/json;charset=utf-8");
 		
-		//원본글 파라미터 => 댓글목록(json)
+		String reply = req.getParameter("reply");
+		String replyer = req.getParameter("replyer");
 		String bno = req.getParameter("bno");
-		String page = req.getParameter("page");
-		page = page == null ? "1" : page ;
 		
-		SearchVO search = new SearchVO();
-		search.setBno(Integer.parseInt(bno));
-		search.setRpage(Integer.parseInt(page));
+		ReplyVO rvo = new ReplyVO();
+		rvo.setReply(reply);
+		rvo.setReplyer(replyer);
+		rvo.setBoardNo(Integer.parseInt(bno));
 		
 		ReplyService svc = new ReplyServiceImpl();
-		List<ReplyVO> list = svc.replyList(search);
-		//ReplyVO rvo = svc.getReply(Integer.parseInt(bno));
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String json = gson.toJson(list);
+		Map<String, Object> result = new HashMap<>();
+		if(svc.addReply(rvo)) {
+			// {"retCode":"Success", "retVal": rvo}
+			result.put("retCode", "Success");
+			result.put("retVal", rvo);
+		}else {
+			// {"retCode":"Fail", "retVal": null}
+			result.put("retCode", "Fail");
+			result.put("retVal", null);
+		}
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(result);
+		
 		resp.getWriter().print(json);
 		
-		//req.setAttribute("rvo", rvo);
-
 	}
 
 }
