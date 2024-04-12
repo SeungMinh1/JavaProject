@@ -5,6 +5,13 @@
   
 <mapper namespace="co.yedam.mapper.ReplyMapper">
 	
+	<select id="replyListNoPage" resultType="co.yedam.vo.ReplyVO" parameterType="co.yedam.common.SearchVO"> 
+		select rownum rn, r.*
+		from tbl_reply r
+		where board_no = #{bno}
+		order by reply_no 
+	</select>
+	
 	<select id="replyList" parameterType="int" resultType="co.yedam.vo.ReplyVO">
 		select *
 		from (select rownum rn, r.*

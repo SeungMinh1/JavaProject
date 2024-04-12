@@ -18,7 +18,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public List<ReplyVO> replyList(SearchVO search) {
 		
-		return mapper.replyList(search);
+		return mapper.replyListNoPage(search);
 	}
 	@Override
 	public boolean removeReply(int rno) {

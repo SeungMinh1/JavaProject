@@ -1,25 +1,66 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="css/styles.css" />
   	<meta charset="UTF-8">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-     let url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=MRtDjOHLVKJj%2BnUSKi%2BnGTXsL%2BVunB3JSDGLQYBUpZX6Q7gORBGET6APk%2Bt9KANSuuHfDJAs5k5iIuFEOViOKA%3D%3D';
-     let xhtp = new XMLHttpRequest();
-     xhtp.open('get', url);
-     xhtp.send();
-     xhtp.onload = function(){
-    	 console.log(JSON.parse(xhtp.response));
-       let result = JSON.parse(xhtp.response);
-       const allData = result.data;
-       result.data.forEach(center => {
-          document.getElementById('list').append(makeRow(center));    
-       });
-     }
 
+      let centers=[];
+      let sidoList = []; // sido 중복값이 제거된 시도정보를 저장.
+
+
+
+      let url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=MRtDjOHLVKJj%2BnUSKi%2BnGTXsL%2BVunB3JSDGLQYBUpZX6Q7gORBGET6APk%2Bt9KANSuuHfDJAs5k5iIuFEOViOKA%3D%3D';
+      let xhtp = new XMLHttpRequest();
+      xhtp.open('get', url);
+      xhtp.send();
+      xhtp.onload = function(){
+        console.log(JSON.parse(xhtp.response));
+        let result = JSON.parse(xhtp.response);
+        centers = result.data;
+        centers.forEach((center, idx) => {
+            if(idx<10){
+              document.getElementById('list').append(makeRow(center));   
+            }
+        });
+
+        //시도중복을 제거한 시도. sidoList 배열에 추가
+        centers.filter(center => {
+          if(sidoList.indexOf(center.sido) == -1){
+            sidoList.push(center.sido);
+          }
+        })
+        console.log(sidoList);
+
+        //sidoList를 이용한 search에 option 생성
+        sidoList.forEach(sido =>{
+          console.log(sido);
+          let opt = document.createElement('option');
+          opt.setAttribute('value', sido);
+          opt.innerText = sido;
+          searchSido.appendChild(opt);
+      })
+
+      }
+
+
+      
      document.addEventListener('DOMContentLoaded', function(e){
         let show = document.getElementById('show');
-        console.log('==>1', show);
+        let list = document.getElementById('list');
+        let findBtn = document.getElementById('findBtn');
+        let searchSido = document.getElementById('searchSido');
+
+        findBtn.addEventListener('click', function(e){
+          list.innerHTML='';
+          let keyword = document.getElementById('searchSido').value;
+
+          centers.filter(center => center.sido== keyword )  //
+          .forEach(center =>list.append(makeRow(center)));
+        })
+
+
 
      })
 
@@ -28,36 +69,44 @@
         let tr = document.createElement('tr');
         let fields = ['id', 'centerName', 'address', 'phoneNumber'];
         fields.forEach(field =>{
-          let td = document.createElement('td');
-          td.innerText = center[field];
-          tr.appendChild(td);
+            let td = document.createElement('td');
+            let txt = center[field];
+            td.innerText = (txt + '').replace('코로나19', ' ');
+            tr.appendChild(td);
         })
+        tr.addEventListener('click', function(e){
+          let centerName = (center.centerName+'').replace('코로나19', ' ');
+          window.open('map.jsp?lat='+center.lat+'&lng='+center.lng+'&centerName='+centerName);
+        })
+
+
         return tr;
      }
 
-
-     document.getElementById('findBtn').addEventListener('click', function(e){
-        let searchValue = document.getElementById('keyword').value; //indexOf?
-        allData.center.centerName.forEach(elem =>{
-          if(elem.indexOf(searchValue) == true){
-            console.log('1');
-          }else console.log('0');
-        })
-        })
     </script>
+     
+
   </head>
   <body>
     <div id="show"></div>
-      <input type="text" id="keyword">
+     <!-- <input type="text" id="keyword">-->
+
+      시도:<select id="searchSido">
+        <option value="">선택</option>
+      </select>
+
       <button id="findBtn">검색</button>
       <table class="table">
-        <tbody id="list">
+        <thead>
           <tr>
-            <th>센터id</th><th>센터명</th><th>센터주소</th><th>연락처</th>
+            <th>센터id</th>
+            <th>센터명</th>
+            <th>센터주소</th>
+            <th>연락처</th>
           </tr>
 
-
-
+        </thead>
+        <tbody id="list">
         </tbody>
       </table>
 

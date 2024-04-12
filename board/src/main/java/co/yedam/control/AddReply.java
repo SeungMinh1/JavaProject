@@ -1,6 +1,7 @@
 package co.yedam.control;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ public class AddReply implements Control {
 		rvo.setReply(reply);
 		rvo.setReplyer(replyer);
 		rvo.setBoardNo(Integer.parseInt(bno));
+		rvo.setReplyDate(new Date());
 		
 		ReplyService svc = new ReplyServiceImpl();
 		Map<String, Object> result = new HashMap<>();

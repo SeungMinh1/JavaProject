@@ -175,7 +175,7 @@ document.getElementById('addReply').addEventListener('click', function(e){
 		if(result.retCode == 'Success'){
 			let page =1;
 			svc.replyList({bno,page},replyListFnc2);
-			document.getElementById('fir').className ='active';
+			//document.getElementById('fir').setAttribute('class', 'active');
 		}else{
 			alert('처리중 에러발생');
 		}

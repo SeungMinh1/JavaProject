@@ -13,6 +13,7 @@ public interface ReplyMapper {
 	public int selectReplyCount(int bno);
 	public int insertReply(ReplyVO rvo);
 	
+	public List<ReplyVO> replyListNoPage(SearchVO search);
 	//chart
 	public List<Map<String, Object>> selectCntByMember();
 }

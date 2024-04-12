@@ -21,6 +21,7 @@ import co.yedam.control.BoardControl;
 import co.yedam.control.BoardListControl;
 import co.yedam.control.ChartForm;
 import co.yedam.control.ChartJson;
+import co.yedam.control.DataTable;
 import co.yedam.control.DomForm;
 import co.yedam.control.LoginControl;
 import co.yedam.control.LoginFormControl;
@@ -41,7 +42,6 @@ import co.yedam.control.ReplyCount;
 import co.yedam.control.ReplyList;
 import co.yedam.control.boardAform;
 import co.yedam.control.boardAjax;
-
 
 //init -> service -> destroy
 public class FrontControl extends HttpServlet{
@@ -108,6 +108,8 @@ public class FrontControl extends HttpServlet{
 		//chart
 		map.put("/chartForm.do",new ChartForm());
 		map.put("/chartJson.do",new ChartJson());
+		
+		map.put("/datatable.do", new DataTable());
 	}
 	
 	
