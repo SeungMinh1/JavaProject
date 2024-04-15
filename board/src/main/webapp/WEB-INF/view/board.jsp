@@ -193,7 +193,7 @@
 
 	})
 
-	table.on('click', 'tbody tr', (e) => {
+	table.on('click', 'tbody tr', (e) => {   //클릭한 tr의 번호를 저장해야되는데
    	 	let classList = e.currentTarget.classList;
 		console.log(classList);
 		if (classList.contains('selected')) {
@@ -203,6 +203,7 @@
 		else {
 			table.rows('.selected').nodes().each((row) => row.classList.remove('selected'));
 			classList.add('selected');
+			
 		}
 	});
 	

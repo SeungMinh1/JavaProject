@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax.html</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="ajax.js"></script>
+</head>
+<body>
+    <div id="show">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id</th><th>이름</th><th>연락처</th><th>비번</th>
+                </tr>
+            </thead>
+            <tbody id="ttbody"></tbody>
+
+        </table>
+    </div>
+    <br><br><br>
+
+    <div id="register">
+        <form name="myFrm">
+            <table border="1">
+                <tr>
+                    <th>Id</th><td><input name="mid"></td>
+                </tr>
+                <tr>
+                    <th>이름</th><td><input name="name"></td>
+                </tr>
+                <tr>
+                    <th>연락처</th><td><input name="phone"></td>
+                </tr>
+                <tr>
+                    <th>비번</th><td><input name="pass"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button>등록</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</body>
+</html>

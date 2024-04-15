@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        
+        $.get('jquery.html', function(result){
+            console.log(result);
+            $('#show').html(result);
+        })
+        
+       /*
+        $.get('../memberAjax.do', function(result){
+            console.log(result);
+            //$('#show').html(result);
+        })
+        */
+    </script>
+    </head>
+    <body>
+        <div id="show"></div>
+    </body>
+</html>
