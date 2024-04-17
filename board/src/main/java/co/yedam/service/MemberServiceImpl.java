@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import co.yedam.common.DataSource;
 import co.yedam.mapper.MemberMapper;
+import co.yedam.vo.CartVO;
 import co.yedam.vo.MemberVO;
 import co.yedam.vo.ProdVO;
 
@@ -40,6 +41,22 @@ public class MemberServiceImpl implements MemberService{
 	public boolean removeMember(String mid) {
 		
 		return mapper.deleteMember(mid) == 1;
+	}
+	
+	// 카트 관련
+	@Override
+	public List<CartVO> cartList() {
+		return mapper.selectCart();
+	}
+
+	@Override
+	public boolean removeCart(int no) {
+		return mapper.deleteCart(no) == 1;
+	}
+
+	@Override
+	public boolean changeQty(CartVO vo) {
+		return mapper.updateCart(vo) == 1;
 	}
 
 }
